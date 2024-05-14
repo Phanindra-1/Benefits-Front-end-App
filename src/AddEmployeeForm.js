@@ -27,6 +27,13 @@ const AddEmployeeForm = ({ onAddEmployee }) => {
     setDependents(updatedDependents);
   };
 
+  const handleRemoveDependent = (dependentToRemove) => {
+    const updatedDependents = dependents.filter(
+      (dependent) => dependent !== dependentToRemove
+    );
+    setDependents(updatedDependents);
+  };
+
   return (
     <div>
       <h2>Add Employee</h2>
@@ -47,6 +54,7 @@ const AddEmployeeForm = ({ onAddEmployee }) => {
             onDependentChange={(updatedDependent) =>
               handleDependentChange(index, updatedDependent)
             }
+            onRemoveDependent={handleRemoveDependent}
           />
         ))}
         <button type="button" onClick={handleAddDependent}>

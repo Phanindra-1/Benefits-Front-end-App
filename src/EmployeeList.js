@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import EditEmployeeForm from "./EditEmployeeForm";
 
 const EmployeeList = ({
@@ -8,10 +8,22 @@ const EmployeeList = ({
   onUpdateEmployee,
   onCancelEdit,
 }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredEmployees = employees.filter((employee) =>
+    employee.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <div>
       <h2>Employees</h2>
-      {employees.map((employee) => (
+      <input
+        type="text"
+        placeholder="Search Employees..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
+      {filteredEmployees.map((employee) => (
         <div key={employee.id}>
           <h3>{employee.name}</h3>
           {editingEmployee && editingEmployee.id === employee.id ? (
